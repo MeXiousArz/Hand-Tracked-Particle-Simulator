@@ -84,10 +84,9 @@
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
         import { HandLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 
-        // --- Core Variables ---
         const PARTICLE_COUNT = 20000;
         let shapeIndex = 0;
-        // UPDATED SHAPE LIST
+
         const shapes = ['sphere', 'heart', 'saturn', 'flower', 'spring', 'butterfly', 'dragon', 'firework', 'dna', 'galaxy'];
         let isTransitioning = false;
         let transitionFactor = 0;
@@ -97,10 +96,9 @@
         let pinchScale = 1;
         let isHandDetected = false;
 
-        // --- Scene Setup ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 7; // Moved camera back slightly for larger shapes
+        camera.position.z = 7;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -112,7 +110,6 @@
         bloom.strength = 1.5;
         composer.addPass(bloom);
 
-        // --- Particles ---
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(PARTICLE_COUNT * 3);
         const targetPositions = new Float32Array(PARTICLE_COUNT * 3);
@@ -134,7 +131,6 @@
         const points = new THREE.Points(geometry, material);
         scene.add(points);
 
-        // --- Shape Geometry Generators ---
         function setShape(type) {
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 let x, y, z;
@@ -186,12 +182,12 @@
                         x = 4 + fireP * 5 + Math.random(); y = (Math.random() - 0.5) * spread; z = (Math.random() - 0.5) * spread;
                     }
                 }
-                // --- NEW SHAPES: DNA & GALAXY ---
+
                 else if (type === 'dna') {
                     const height = 10;
                     const turns = 3;
                     const radius = 1.8;
-                    // Split: 40% strand A, 40% strand B, 20% rungs
+
                     if (p < 0.4) {
                         const pStrand = p / 0.4;
                         const angle = pStrand * Math.PI * 2 * turns;
@@ -234,7 +230,6 @@
         }
         setShape('sphere');
 
-        // --- AI Tracking Engine ---
         let handLandmarker;
         let lastHandTime = -1;
 
@@ -302,7 +297,6 @@
             }, 1000);
         }
 
-        // --- Main Animation Loop ---
         function animate() {
             requestAnimationFrame(animate);
 
@@ -363,5 +357,6 @@
         });
     </script>
 </body>
+
 
 </html>
