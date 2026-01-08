@@ -55,7 +55,7 @@
 <body>
 
     <div id="ui">
-        <h2 style="margin:0;">Core: <span id="shape-name" class="label">Sphere</span></h2>
+        <h2 style="margin:0;">Core: <span id="shape-name" class="label">DNA</span></h2>
         <p id="status-text" style="font-size: 0.8em; margin-top: 5px;">Awaiting for Gesture...</p>
         <div style="font-size: 0.7em; opacity: 0.6; margin-top: 20px;">
             [Left/Right Hand] -> Control Rotation<br>
@@ -87,7 +87,9 @@
         const PARTICLE_COUNT = 20000;
         let shapeIndex = 0;
 
-        const shapes = ['sphere', 'heart', 'saturn', 'flower', 'spring', 'butterfly', 'dragon', 'firework', 'dna', 'galaxy'];
+        // UPDATED SHAPE ORDER
+        const shapes = ['dna', 'firework', 'heart', 'spring', 'sphere', 'butterfly', 'saturn', 'dragon', 'galaxy', 'flower'];
+        
         let isTransitioning = false;
         let transitionFactor = 0;
         let canSwitch = true;
@@ -228,7 +230,9 @@
             }
             document.getElementById('shape-name').innerText = type;
         }
-        setShape('sphere');
+        
+        // Start with the first shape in your new list
+        setShape(shapes[0]);
 
         let handLandmarker;
         let lastHandTime = -1;
@@ -357,6 +361,5 @@
         });
     </script>
 </body>
-
 
 </html>
